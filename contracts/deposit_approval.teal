@@ -1,0 +1,136 @@
+#pragma version 6
+txn ApplicationID
+int 0
+==
+bnz main_l12
+txn OnCompletion
+int NoOp
+==
+bnz main_l5
+txn OnCompletion
+int OptIn
+==
+txn OnCompletion
+int CloseOut
+==
+||
+txn OnCompletion
+int UpdateApplication
+==
+||
+txn OnCompletion
+int DeleteApplication
+==
+||
+bnz main_l4
+err
+main_l4:
+int 0
+return
+main_l5:
+txna ApplicationArgs 0
+byte "asa_deposit"
+==
+bnz main_l9
+txna ApplicationArgs 0
+byte "deposit"
+==
+bnz main_l8
+err
+main_l8:
+txn NumAssets
+int 0
+==
+assert
+txn NumAppArgs
+int 2
+==
+assert
+itxn_begin
+int pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Sender
+global CurrentApplicationAddress
+itxn_field Receiver
+txna ApplicationArgs 1
+btoi
+itxn_field Amount
+int 0
+itxn_field Fee
+txn Sender
+itxn_field RekeyTo
+itxn_submit
+int 1
+return
+main_l9:
+txn NumAppArgs
+int 2
+==
+assert
+txn NumAssets
+int 1
+==
+assert
+global CurrentApplicationAddress
+txna Assets 0
+asset_holding_get AssetBalance
+store 1
+store 0
+load 1
+!
+bnz main_l11
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field Sender
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+int 0
+itxn_field Fee
+txn Sender
+itxn_field RekeyTo
+itxn_submit
+int 1
+return
+main_l11:
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txna Assets 0
+itxn_field XferAsset
+int 0
+itxn_field AssetAmount
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field Fee
+itxn_submit
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field Sender
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+int 0
+itxn_field Fee
+txn Sender
+itxn_field RekeyTo
+itxn_submit
+int 1
+return
+main_l12:
+int 1
+return
