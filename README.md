@@ -1,6 +1,6 @@
 # AlgoDepo
 
-The aim of the following contract is to deposit Algo or Algorant Smart Assetsin a single Transaction.
+The aim of the application and PyTeal contract is to deposit Algo or Algorant Standard Assets in a single Transaction.
 
 User compiles a deposit app call transaction and sets the [rekeyTo](https://developer.algorand.org/docs/get-details/transactions/transactions/#common-fields-header-and-type) field to the address of the contract.
 
@@ -60,7 +60,7 @@ Such that
 
 ![img](https://i.imgur.com/qwBnpYV.png)
 
-Illustartion of the working app on AlgoExplorer:
+Illustration of the working app on AlgoExplorer:
 
 https://testnet.algoexplorer.io/application/85314426
 
