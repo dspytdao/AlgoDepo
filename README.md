@@ -48,7 +48,7 @@ npm i
 ## Run the Deposit App
 
 First add Mnemonic passphrase to ```.env```.
-Next go to the [testnet dispenser](https://dispenser.testnet.aws.algodev.network/) to obtain Algo. Create an asset or obtain one from a faucet and enter its id in ```config.js```.
+Next go to the [testnet dispenser](https://dispenser.testnet.aws.algodev.network/) to obtain Algo. Create an asset using ```createasset.py``` or obtain one from a faucet and enter its id in ```config.js```.
 
 To illustrate the app run:
 
@@ -64,7 +64,7 @@ Illustration of the working app on AlgoExplorer:
 
 https://testnet.algoexplorer.io/application/85314426
 
-## Overview of the files
+## Overview of the .js files
 
 ```asa_deposit.js``` deposits asa asset
 
