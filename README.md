@@ -64,6 +64,20 @@ Illustration of the working app on AlgoExplorer:
 
 https://testnet.algoexplorer.io/application/85314426
 
+## Overview of the files
+
+```asa_deposit.js``` deposits asa asset
+
+```config.js``` contains the user instance and id of the asset to transfer
+
+```deploy.js``` deploys contract ie approval and clear state teal files
+
+```deposit.js``` deposits Algo
+
+```index.js``` runs deploy, deposit and asa_deposit 
+
+```utils.js``` contains instance of Algorand Client, submitTransaction function to sign, send and wait for transaction confirmation
+
 ### Further Resources
 
 [Pyteal](https://pyteal.readthedocs.io/en/stable/index.html)
