@@ -1,8 +1,6 @@
 # AlgoDepo
 
-
-
-The aim of the following contract is to
+The aim of the following contract is to deposit Algo and Algorant Smart Assets.
 
 This is the building block for more complex applications on Algorand and its ecosystem.
 
@@ -38,26 +36,32 @@ To install packages:
 npm i
 ```
 
-To deploy the deposit App on Algorand:
+## Run the Deposit App
+
+First add Mnemonic passphrase to ```.env```.
+Next go to the [testnet dispenser](https://dispenser.testnet.aws.algodev.network/) to obtain Algo. Create an asset or obtain one from a faucet and enter its id in ```config.js```.
+
+To illustrate the app run:
 
 ```bash
-node createApp.js
+npm start
 ```
+
+Such that
+
+![](https://imgur.com/a/2rC2aiR)
+
+Illustartion of the working app on AlgoExplorer:
+
+https://testnet.algoexplorer.io/application/85314426
 
 
 ### Contract Args
 
-takes 2 args in case of Algo deposit. 
-type of the tx
-amount
+The contract takes 2 args.
 
-for instance:
-
-app_args = [b"deposit", 1]
-
-### SandBox (testing Environment)
-
-
+The first arg is the type fo transaction: deposit or asa_deposit.
+The second arg is the amount deposited.
 ### Further Resources
 
 [Pyteal](https://pyteal.readthedocs.io/en/stable/index.html)

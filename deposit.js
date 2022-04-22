@@ -1,20 +1,18 @@
 import { encodeUint64, getApplicationAddress, makeApplicationNoOpTxn, } from "algosdk";
 
 import { algodClient, submitTransaction } from "./utils.js";
-import { appId, user } from "./config.js";
+import { user } from "./config.js";
 
-async function main() {
-  let txn
-  let txId
+export const deposit = async (appId) => {
 
   // get transaction params
   const params = await algodClient.getTransactionParams().do();
 
   // deposit
   const enc = new TextEncoder();
-  const depositAmount = 2 * 1e5; //0.2 Algo
+  const depositAmount = 4 * 1e5; //0.4 Algo
 
-  txn = makeApplicationNoOpTxn(
+  let txn = makeApplicationNoOpTxn(
     user.addr,
     { ...params, flatFee: true, fee: 2000 }, // must pay for inner transaction
     appId,
@@ -27,9 +25,9 @@ async function main() {
     getApplicationAddress(appId), // rekey to application address
   );
 
-  txId = await submitTransaction(txn, user.sk);
+  let txId = await submitTransaction(txn, user.sk);
 
   console.log("Deposit transaction id: " + txId);
 }
 
-main().catch(console.error);
+//main().catch(console.error);

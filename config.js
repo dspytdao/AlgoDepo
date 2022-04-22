@@ -4,4 +4,4 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const user = mnemonicToSecretKey(process.env.Mnemo);
-export const appId = 84896004;
+export const asset_Id = 84891710;

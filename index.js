@@ -2,10 +2,11 @@ import { makeApplicationCreateTxnFromObject,OnApplicationComplete, waitForConfir
 import fs from "fs";
 
 import { algodClient } from "./utils.js";
-import { user } from "./config.js";
+import { user, asset_id } from "./config.js";
+import { deposit } from "./deposit.js";
+import { asa_deposit } from "./asa_deposit.js";
 
 const createApp = async () => {
-    try {
       const suggestedParams = await algodClient.getTransactionParams().do();
   
       const app = fs.readFileSync(new URL("../AlgoDepo/contracts/deposit_approval.teal", import.meta.url), "utf8");
@@ -33,9 +34,8 @@ const createApp = async () => {
       
       console.log("Created app-id: ", appId);
 
-    } catch (error) {
-      console.error(error.message);
-    }
+      deposit(appId);
+      asa_deposit(appId, asset_id);
   };
   
 createApp();
