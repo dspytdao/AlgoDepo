@@ -1,20 +1,11 @@
-import { setupClient } from "./client/client.js";
-
-import {
-    makeApplicationCreateTxnFromObject,
-    mnemonicToSecretKey,
-    OnApplicationComplete,
-    waitForConfirmation,
-} from "algosdk";
-
+import { makeApplicationCreateTxnFromObject,OnApplicationComplete, waitForConfirmation } from "algosdk";
 import fs from "fs";
-import dotenv from "dotenv";
-dotenv.config();
+
+import { algodClient } from "./utils.js";
+import { user } from "./config.js";
 
 const createApp = async () => {
     try {
-      const account = mnemonicToSecretKey(process.env.Mnemo);
-      const algodClient = setupClient();
       const suggestedParams = await algodClient.getTransactionParams().do();
   
       const app = fs.readFileSync(new URL("../AlgoDepo/contracts/deposit_approval.teal", import.meta.url), "utf8");
@@ -25,7 +16,7 @@ const createApp = async () => {
     
       const tx = makeApplicationCreateTxnFromObject({
         suggestedParams,
-        from: account.addr,
+        from: user.addr,
         approvalProgram: new Uint8Array(Buffer.from(compileApp.result, "base64")),
         clearProgram: new Uint8Array(Buffer.from(compiledClearProg.result, "base64")),
         numGlobalByteSlices: 0,
@@ -35,11 +26,12 @@ const createApp = async () => {
         onComplete: OnApplicationComplete.NoOpOC,
       });
 
-      let txSigned = tx.signTxn(account.sk);
+      let txSigned = tx.signTxn(user.sk);
       const { txId } = await algodClient.sendRawTransaction(txSigned).do();
       const transactionResponse = await waitForConfirmation(algodClient, txId, 5);
       const appId = transactionResponse["application-index"];
-      console.log("Created new app-id: ", appId);
+      
+      console.log("Created app-id: ", appId);
 
     } catch (error) {
       console.error(error.message);

@@ -1,5 +1,7 @@
 # AlgoDepo
 
+
+
 The aim of the following contract is to
 
 This is the building block for more complex applications on Algorand and its ecosystem.
@@ -7,7 +9,9 @@ This is the building block for more complex applications on Algorand and its eco
 Submission for https://gitcoin.co/issue/c3protocol/hackalgo/1/100028569
 ## Installation 
 
-### Python Environement
+Required instalation of Python3 and NPM.
+
+### Python Environment
 
 ```bash
 pip install virtualenv
@@ -21,6 +25,25 @@ One line if virtualenv is installed:
 ```bash
 virtualenv venv && source venv/bin/activate && pip install -r requirements.txt
 ```
+
+To convert Pyteal to teal contract:
+```bash
+python3 /contracts/contract.py
+```
+
+### NPM
+
+To install packages:
+```bash
+npm i
+```
+
+To deploy the deposit App on Algorand:
+
+```bash
+node createApp.js
+```
+
 
 ### Contract Args
 

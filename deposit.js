@@ -12,7 +12,7 @@ async function main() {
 
   // deposit
   const enc = new TextEncoder();
-  const depositAmount = 2 * 1e5;
+  const depositAmount = 2 * 1e5; //0.2 Algo
 
   txn = makeApplicationNoOpTxn(
     user.addr,
@@ -26,6 +26,7 @@ async function main() {
     undefined,
     getApplicationAddress(appId), // rekey to application address
   );
+
   txId = await submitTransaction(txn, user.sk);
 
   console.log("Deposit transaction id: " + txId);
