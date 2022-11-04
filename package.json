@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Pfed-prog/AlgoDepo#readme",
   "dependencies": {
-    "algosdk": "^1.20.0",
+    "algosdk": "^1.23.1",
     "dotenv": "^16.0.2"
   }
 }
